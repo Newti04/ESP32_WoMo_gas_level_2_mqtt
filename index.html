@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WomoLIN Gaslevel ESP32</title>
+    <style>
+        :root {{ --bg-color: #f4f4f9; --container-bg: #ffffff; --text-color: #333333; --subtitle-color: #666666; --card-bg: #eef7fc; --card-val: #005999; --box-bg: #f0f0f0; --box-border: #cccccc; }}
+        [data-theme="dark"] {{ --bg-color: #121212; --container-bg: #1e1e1e; --text-color: #e0e0e0; --subtitle-color: #a0a0a0; --card-bg: #2a2a2a; --card-val: #3498db; --box-bg: #252525; --box-border: #444444; }}
+        body {{ font-family: Arial, sans-serif; background: var(--bg-color); color: var(--text-color); text-align: center; padding: 15px; transition: background 0.3s, color 0.3s; }}
+        .container {{ max-width: 500px; margin: auto; background: var(--container-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; }}
+        h1 {{ color: #007acc; margin-bottom: 5px; }}
+        .subtitle {{ color: var(--subtitle-color); font-size: 0.9em; margin-bottom: 20px; }}
+        .theme-switch-wrapper {{ position: absolute; top: 20px; right: 20px; }}
+        .theme-switch {{ display: inline-block; height: 24px; position: relative; width: 44px; }}
+        .theme-switch input {{ display:none; }}
+        .slider {{ background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }}
+        .slider:before {{ background-color: white; bottom: 3px; content: ""; height: 18px; left: 4px; position: absolute; transition: .4s; width: 18px; border-radius: 50%; }}
+        input:checked + .slider {{ background-color: #007acc; }}
+        input:checked + .slider:before {{ transform: translateX(18px); }}
+        
+        .section {{ border: 1px solid var(--box-border); padding: 15px; border-radius: 10px; margin-bottom: 20px; background: var(--container-bg); text-align: left; }}
+        .section h2 {{ margin: 0 0 10px 0; font-size: 1.2em; color: #007acc; border-bottom: 1px solid var(--box-border); padding-bottom: 5px; }}
+        
+        .progress-container {{ background-color: var(--box-bg); border-radius: 8px; padding: 3px; margin: 10px 0; border: 1px solid var(--box-border); }}
+        .progress-bar {{ background: linear-gradient(90deg, #28a745, #218838); height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; }}
+        
+        .card-row {{ display: flex; justify-content: space-between; margin: 5px 0; padding: 8px; background: var(--card-bg); border-radius: 6px; }}
+        .card-row span.val {{ font-weight: bold; color: var(--card-val); }}
+        
+        .btn {{ display: block; width: 100%; padding: 10px; margin-top: 10px; background: #ff3b30; color: white; border: none; border-radius: 6px; font-size: 1em; cursor: pointer; text-decoration: none; text-align: center; box-sizing: border-box; }}
+        .btn:hover {{ background: #d32f2f; }}
+        .btn-cal {{ background: #28a745; margin-top: 5px; }}
+        .btn-cal:hover {{ background: #218838; }}
+        
+        .cal-inputs {{ display: flex; gap: 10px; align-items: center; margin-top: 8px; }}
+        .cal-inputs input {{ width: 65%; padding: 8px; border: 1px solid var(--box-border); background: var(--bg-color); color: var(--text-color); border-radius: 6px; }}
+        .cal-inputs button {{ width: 35%; }}
+    </style>
+    <meta http-equiv="refresh" content="10">
+</head>
+<body>
+    <div class="container">
+        <div class="theme-switch-wrapper"><label class="theme-switch" for="checkbox"><input type="checkbox" id="checkbox" /><div class="slider"></div></label></div>
+        <h1>WomoLIN Gaslevel</h1>
+        <div class="subtitle">Dual ESP32 Gaswaage</div>
+        
+        <!-- FLASCHE 1 -->
+        <div class="section">
+            <h2>Gasflasche 1</h2>
+            <div class="progress-container"><div class="progress-bar" id="pbar1" style="width: {level_1}%;"><span>{level_1}%</span></div></div>
+            <div class="card-row"><span>Gasgewicht:</span><span class="val">{gasweight_1} kg</span></div>
+            <div class="card-row"><span>Gesamtgewicht:</span><span class="val">{weight_1} kg</span></div>
+            <a href="/tare?id=1" class="btn" onclick="return confirm('Flasche 1 tarieren?')">Nullstellen</a>
+            <form action="/set_scale" method="GET" class="cal-inputs">
+                <input type="hidden" name="id" value="1">
+                <input type="number" name="scale" step="0.1" value="{scale_factor_1}" required>
+                <button type="submit" class="btn btn-cal">Scale 1</button>
+            </form>
+        </div>
+
+        <!-- FLASCHE 2 -->
+        <div class="section">
+            <h2>Gasflasche 2</h2>
+            <div class="progress-container"><div class="progress-bar" id="pbar2" style="width: {level_2}%;"><span>{level_2}%</span></div></div>
+            <div class="card-row"><span>Gasgewicht:</span><span class="val">{gasweight_2} kg</span></div>
+            <div class="card-row"><span>Gesamtgewicht:</span><span class="val">{weight_2} kg</span></div>
+            <a href="/tare?id=2" class="btn" onclick="return confirm('Flasche 2 tarieren?')">Nullstellen</a>
+            <form action="/set_scale" method="GET" class="cal-inputs">
+                <input type="hidden" name="id" value="2">
+                <input type="number" name="scale" step="0.1" value="{scale_factor_2}" required>
+                <button type="submit" class="btn btn-cal">Scale 2</button>
+            </form>
+        </div>
+
+        <!-- UMGEBUNGSSENSOREN -->
+        <div class="section">
+            <h2>Umgebung & Sensorik</h2>
+            <div class="card-row"><span>Temperatur (DS18B20):</span><span class="val">{temperature_ds18b20} &deg;C</span></div>
+            <div class="card-row"><span>Temperatur (BMP280):</span><span class="val">{temperature} &deg;C</span></div>
+            <div class="card-row"><span>Luftdruck:</span><span class="val">{pressure} hPa</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Logik (ohne geschweifte Klammern über Einzeiler-Pfeilfunktionen gelöst)
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        if (currentTheme === 'dark') toggleSwitch.checked = true;
+        
+        toggleSwitch.addEventListener('change', (e) => document.documentElement.setAttribute('data-theme', e.target.checked ? 'dark' : 'light'), false);
+        toggleSwitch.addEventListener('change', (e) => localStorage.setItem('theme', e.target.checked ? 'dark' : 'light'), false);
+
+        // Dynamische Balkenfarben (komplett ohne geschweifte Klammern formatiert)
+        const lvl1 = parseFloat("{level_1}");
+        const lvl2 = parseFloat("{level_2}");
+        const pb1 = document.getElementById("pbar1");
+        const pb2 = document.getElementById("pbar2");
+
+        if (lvl1 <= 15) pb1.style.background = "linear-gradient(90deg, #dc3545, #bd2130)";
+        if (lvl1 > 15 && lvl1 <= 40) pb1.style.background = "linear-gradient(90deg, #ffc107, #d39e00)";
+
+        if (lvl2 <= 15) pb2.style.background = "linear-gradient(90deg, #dc3545, #bd2130)";
+        if (lvl2 > 15 && lvl2 <= 40) pb2.style.background = "linear-gradient(90deg, #ffc107, #d39e00)";
+    </script>
+</body>
+</html>
