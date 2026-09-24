@@ -3,10 +3,10 @@ ZWEI_WAAGEN_AKTIV = True  # Setze auf True, sobald die 2. Waage physisch angesch
 
 # --- NETZWERK & MQTT ---
 WIFI_SSID = "<YOURSSID>"
-WIFI_PASS = "<PASSWORT<"
+WIFI_PASS = "<PASSWORT>"
 MQTT_BROKER = "192.168.xxx.yyy"
 MQTT_TOPIC = "WoMo/gaslevel"
-CLIENT_ID = "esp32_gaslevel"
+CLIENT_ID = "WoMo_gaslevel_esp32"
 
 # --- PIN-BELEGUNG (ESP32) ---
 # HX711 Wägezelle 1 (Flasche 1)
@@ -17,7 +17,7 @@ HX711_SCK_1 = 17
 HX711_DOUT_2 = 32
 HX711_SCK_2 = 27
 
-# BMP280 I2C-Bus
+# BMP280 I2C-Bus 0
 BMP280_SDA = 21
 BMP280_SCL = 22
 
