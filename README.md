@@ -14,8 +14,11 @@ mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqt
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/bmp280.py', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/config.py', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/hx711.py', '/')
+mip.install('github:SergeyPiskunov/micropython-hx711/hx711.py', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/index.html', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/main.py', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/test_bmp280.py', '/')
 mip.install('github:Newti04/ESP32_WoMo_gas_level_2_mqttSP32_WoMo_gas_level_2_mqtt/test_ds18b20.py', '/')
 import main
+
+https://github.com/SergeyPiskunov/micropython-hx711
