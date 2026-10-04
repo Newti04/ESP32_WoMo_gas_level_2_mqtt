@@ -6,7 +6,7 @@ WIFI_SSID = "<YOURSSID>"
 WIFI_PASS = "<PASSWORT>"
 MQTT_BROKER = "192.168.xxx.yyy"
 MQTT_TOPIC = "WoMo/gaslevel"
-CLIENT_ID = "WoMo_gaslevel_esp32"
+CLIENT_ID = "WoMo-Gaslevel"
 
 # --- PIN-BELEGUNG (ESP32) ---
 # HX711 Wägezelle 1 (Flasche 1)
