@@ -141,7 +141,7 @@ def calculate_gas(total_weight, tare, max_net):
     return round(net, 2), round(100.0 if pct > 100 else pct, 1)
 
 last_measurement = 0
-MEASURE_INTERVAL = 20 
+MEASURE_INTERVAL = 5
 
 while True:
     handle_webserver()
