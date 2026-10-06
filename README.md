@@ -2,7 +2,7 @@
 
 Hardware:
 
-1xESP32 WROOM
+1x ESP32 WROOM
 
 2x hx711 (SDA Pin 16,SCL Pin 17 und SDA Pin 27 SCL Pin 32)
 
