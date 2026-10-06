@@ -1,14 +1,17 @@
 Hardware:
+
 1xESP32 WROOM
+
 2x hx711 (SDA Pin 16,SCL Pin 17 und SDA Pin 27 SCL Pin 32)
+
 1x BMP280 (SDA Pin 8, SCL Pin 9)
+
 1x DS18B20 (Pin 4)
+
 1x 470kOhm Widerstand
 
 Software:
-Micropython
-webserver asyncron
-mqtt client asyncron
+Micropython mit asyncronem webserver, mqtt client
 
 
 Der ESP32 soll einen WLAN hotspot haben, um die ersten WLAN Einstellungen vornehmen zu können und falls keine WLAN Verbindung zustande kommt.
