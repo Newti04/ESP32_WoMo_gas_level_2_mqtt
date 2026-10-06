@@ -1,3 +1,5 @@
+# ESP32_WoMo_wgas_level_2_mqtt
+
 Hardware:
 
 1xESP32 WROOM
@@ -12,6 +14,7 @@ Hardware:
 
 Software:
 Micropython mit asyncronem webserver, mqtt client
+
 
 
 Der ESP32 soll einen WLAN hotspot haben, um die ersten WLAN Einstellungen vornehmen zu können und falls keine WLAN Verbindung zustande kommt.
@@ -43,7 +46,7 @@ den DS18B20
 
 
 
-# ESP32_WoMo_gas_level_2_mqtt
+# ESP32_WoMo_wgas_level_2_mqtt
 Micropython script to get the weight with two scales from gas bottles for hardware ESP32, hx711, bmp280 and DS18B20 for external temperature. The measurements are showed on a local website and published to a mqtt server.
 
 
