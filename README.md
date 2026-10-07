@@ -4,18 +4,16 @@ Hardware:
 
 1x ESP32 (Wroom-32)
 
-2x hx711 (SDA Pin 16,SCL Pin 17 und SDA Pin 27 SCL Pin 32)
+2x hx711 (HX711_DOUT_1 = 16, HX711_SCK_1 = 17, HX711_DOUT_2 = 32, HX711_SCK_2 = 27)
 
-1x BMP280 (SDA Pin 8, SCL Pin 9)
+1x BMP280 (BMP280_SDA = 21, BMP280_SCL = 22)
 
-1x DS18B20 (Pin 4)
+1x DS18B20 (DS18B20_PIN = 4)
 
-1x 470kOhm Widerstand
+1x 470kOhm Widerstand (PullUp PIN 4)
 
 Software:
 Micropython mit asyncronem webserver, mqtt client
-
-
 
 Der ESP32 soll einen WLAN hotspot haben, um die ersten WLAN Einstellungen vornehmen zu können und falls keine WLAN Verbindung zustande kommt.
 Das WLAN und der Mqtt Client sollen sich wieder verbinden, falls die Netzwerk Verbindung unterbrochen war.
